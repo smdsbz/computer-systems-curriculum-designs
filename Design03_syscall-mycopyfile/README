@@ -1,0 +1,62 @@
++-----------------------------+
+|                             |
+|  My  Custom  System  Calls  |
+|                             |
++-----------------------------+
+
+
+NOTE
+----
+
+All modifications are based on linux kernel version 4.20.4!
+
+Tests passed on my i5-8300H machine by replace stock kernel shipped with Ubuntu
+18.04.
+
+-   nVidia GPU (GTX 1050M) not working with version 4.20.x, may need to re-
+    install the driver, haven't tried.
+-   HID-I2C trackpack is working (wasn't working on stock kernel, version
+    4.15.x).
+
+Usage
+-----
+
+1.  Get yourself a copy of linux source (dev is done on version 4.20.4 and
+    tests passed, good luck with other versions).
+2.  Replace ``arch/x86/entry/syscalls/syscall_64.tbl`` and
+    ``arch/x86/entry/syscall_64.c`` with modified versions provided in this
+    folder.
+3.  Compile the kernel.
+4.  Write a small C program to test them out (say the ``test-mycopyfile.c``
+    provided)!
+
+
+The New System Calls
+====================
+
+myhelloworld (335)
+------------------
+
+Echos the starting point of all programs to the kernel ring buffer, and returns
+the doubled only calling parameter.
+
+Args:
+    di: Some number.
+
+Return:
+    di * 2, or some random number if you forgot to pass the parameter.
+
+mycopyfile (336)
+----------------
+
+Copy file specified by the first parameter to the path specified by the second.
+
+Read and write are done in kernel state, which is bad practice, but still
+doesn't change the fact that this is asked by the courseware.
+
+Args:
+    di: Pointer to source file path.
+    si: Pointer to destination file path.
+
+Return:
+    0 if golden, -1 go consult ``dmesg``.
