@@ -10,8 +10,8 @@ NOTE
 
 All modifications are based on linux kernel version 4.20.4!
 
-Tests passed on my i5-8300H machine by replace stock kernel shipped with Ubuntu
-18.04.
+Tests passed on my i5-8300H machine by replacing stock kernel shipped with
+Ubuntu 18.04.
 
 -   nVidia GPU (GTX 1050M) not working with version 4.20.x, may need to re-
     install the driver, haven't tried.

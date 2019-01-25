@@ -40,25 +40,6 @@ asmlinkage long __xxx_sys_myhelloworld(const struct pt_regs *args) {
     return args->di * 2;
 }
 
-// /*
-//  * NOTE: Must be invoked in userspace!
-//  */
-// static int __mystrlen(char *start, int maxlen) {
-//     int len;
-//     mm_segment_t old_fs;
-//     old_fs = get_fs();
-//     set_fs(KERNEL_DS);      // NOTE: Bypass kernel space address checking
-//     printk(KERN_DEBUG "__mystrlen: entering __mystrlen!\n");
-//     for (len = 0; start[len] != '\0' && len != maxlen; ++len) { /* pass */; }
-//     if (start[len] != '\0') {
-//         set_fs(old_fs);
-//         return -1;
-//     }
-//     set_fs(old_fs);
-//     printk(KERN_DEBUG "__mystrlen: returning from __mystrlen!\n");
-//     return len;
-// }
-
 asmlinkage long __xxx_sys_mycopyfile(const struct pt_regs *args) {
     mm_segment_t old_fs;
     int src_fd, dst_fd;
