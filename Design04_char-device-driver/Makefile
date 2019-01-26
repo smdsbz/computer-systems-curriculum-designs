@@ -1,6 +1,5 @@
-obj-m += helloworldmod.o
+obj-m	:= mycharflipdev.o
 
-PWD	:=$(shell pwd)
 KVER	:=$(shell uname -r)
 KDIR	:=/lib/modules/$(KVER)/build
 
