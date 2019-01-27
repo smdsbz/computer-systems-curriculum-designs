@@ -8,3 +8,7 @@ all:
 
 clean:
 	make -C $(KDIR) M=$(PWD) clean
+
+test:
+	echo -n a > /dev/mycharflip0
+	cat /dev/mycharflip0
