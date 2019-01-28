@@ -152,6 +152,7 @@ static ssize_t mycharflip_write(struct file *file, const char __user *user_buf,
         return 0;
     }
     // TODO: Mutex lock
+    // allocate space if not previous writes
     if (unlikely(priv_data->last_input == NULL)) {
         priv_data->last_input = kmalloc(1, GFP_KERNEL);
         if (unlikely(priv_data->last_input == NULL)) {
@@ -195,7 +196,8 @@ static int __init mycharflip_init(void) {   // {{{
                 __func__);
         return -ENOMEM;
     }
-    memset(priv_data_arr, 0, MYCHARFLIP_DEV_NUM * sizeof(struct mycharflip_data_t));
+    memset(priv_data_arr, 0,
+            MYCHARFLIP_DEV_NUM * sizeof(struct mycharflip_data_t));
     // register device class
     class = class_create(THIS_MODULE, CLASS_NAME);
     if (unlikely(IS_ERR(class))) {
@@ -230,7 +232,7 @@ static int __init mycharflip_init(void) {   // {{{
                             "%s%u", DEVICE_NAME, idx);
         if (unlikely(IS_ERR(priv_data_arr[idx].device))) {
             printk(KERN_ALERT "%s: Failed on device_create()!\n", __func__);
-            retval = (long)priv_data_arr[idx].device;
+            retval = PTR_ERR(priv_data_arr[idx].device);
             priv_data_arr[idx].device = NULL;
             goto __JUMPSIGN_mycharflip_init_failed_on_creating_device;
         }

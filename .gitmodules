@@ -1,3 +1,9 @@
 [submodule "Design01_simplified-cp"]
 	path = Design01_simplified-cp
 	url = https://github.com/smdsbz/mycopy.git
+[submodule "GSysMon"]
+	path = GSysMon
+	url = https://github.com/smdsbz/GSysMon.git
+[submodule "Design05_system-monitor"]
+	path = Design05_system-monitor
+	url = https://github.com/smdsbz/GSysMon.git
